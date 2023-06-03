@@ -35,6 +35,19 @@ public class Partner {
         this.optionsList = optionsList;
     }
 
+    public Partner(int id, String username, String password, String nickname, double hourlyRate, int availability, byte[] image, LocalDate dob, String address, int gender) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.nickname = nickname;
+        this.hourlyRate = hourlyRate;
+        this.availability = availability;
+        this.image = image;
+        this.dob = dob;
+        this.address = address;
+        this.gender = gender;
+    }
+
     public int getId() {
         return id;
     }

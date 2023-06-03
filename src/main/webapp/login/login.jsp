@@ -36,8 +36,8 @@
     <div id="formLogin">
         <fieldset style="width: 300px">
             <legend style="text-align: center">Đăng nhập</legend>
-            <p>Username : <input type="text" placeholder="Tên đăng nhập" name="userNameLogin"></p>
-            <p>Password : <input type="password" placeholder="Mật khẩu" name="passWordLogin"></p>
+            <p>Username : <input style="width:280px" type="text" placeholder="Tên đăng nhập" name="userNameLogin"></p>
+            <p>Password : <input style="width:280px" type="password" placeholder="Mật khẩu" name="passWordLogin"></p>
             <button class="btn btn-info" type="submit" style="margin-left: 60px">Đăng
                 nhập
             </button>

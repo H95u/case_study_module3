@@ -20,11 +20,14 @@
 </head>
 <body>
 <div>
-
+    <a href="/home">
+        <img style="width: 50px;height: 50px" src="/img/logo.png">
+    </a>
+    <h1 style="text-align: center;color: white">THÔNG TIN CÁ NHÂN</h1>
 </div>
 <hr>
 <div class="container emp-profile">
-    <form id="myForm" method="post" action="/userInfo?action=upload&id=${user.id}" enctype="multipart/form-data">
+    <form id="myForm" method="post" action="/home?action=upload&id=${user.id}" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
@@ -35,10 +38,7 @@
                         <img style="border-radius: 50px;height: 250px;width: 250px"
                              src="data:image/jpeg;base64,${Base64.getEncoder().encodeToString(user.image)}"/>
                     </c:if>
-                    <div style="margin-top: 5px" class="file btn btn-lg btn-primary" onclick="showUploadBtn()">
-                        Thêm Ảnh
-                        <input oninput="submitForm()" type="file" name="file"/>
-                    </div>
+
                 </div>
             </div>
             <button id="submit-upload-btn" type="submit" style="display: none;
@@ -48,12 +48,10 @@
             <div class="col-md-4">
                 <div class="profile-head">
                     <h5>
-                        HỌ & TÊN
+                        Nickname : ${user.nickname}
                     </h5>
-                    <h6>
-                        Địa Chỉ
-                    </h6>
-                    <p class="proile-rating">Loại DV : <span>Giá/h</span></p>
+
+                    <p class="proile-rating">Giá thuê : <span>${user.hourlyRate}/h</span></p>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
@@ -67,11 +65,11 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <a href="/userInfo?action=update&id=${user.id}"> <input class="profile-edit-btn" name="btnAddMore"
-                                                                        value="Sửa thông tin"/></a>
+                <a class="btn btn-danger">Thuê</a>
             </div>
             <div class="col-md-2">
-                <input class="profile-edit-btn" name="btnAddMore" value="Trạng thái"/>
+                <input class="profile-edit-btn" name="btnAddMore"
+                       value="${user.availability == 1 ? 'Có thể thuê' : 'Đang bận'}"/>
             </div>
         </div>
         <div class="row">
@@ -79,15 +77,8 @@
                 <div class="profile-work">
                     <p>FACEBBOOK LINK</p>
                     <a href="">FaceBook Link</a><br/>
-                    <!--            <a href="">Bootsnipp Profile</a><br/>-->
-                    <!--            <a href="">Bootply Profile</a>-->
                     <p>MÔ TẢ</p>
                     <p>Lịch sự và chuyên nghiệp</p>
-                    <!--            <a href="">Web Designer</a><br/>-->
-                    <!--            <a href="">Web Developer</a><br/>-->
-                    <!--            <a href="">WordPress</a><br/>-->
-                    <!--            <a href="">WooCommerce</a><br/>-->
-                    <!--            <a href="">PHP, .Net</a><br/>-->
                 </div>
             </div>
             <div class="col-md-8">
@@ -98,7 +89,7 @@
                                 <label>Họ và tên</label>
                             </div>
                             <div class="col-md-6">
-                                <p>${user.fullName}</p>
+                                <p>${user.nickname}</p>
                             </div>
                         </div>
                         <div class="row">
@@ -111,23 +102,29 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label>Email</label>
+                                <label>Trạng thái</label>
                             </div>
                             <div class="col-md-6">
-                                <p>${user.email}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>SĐT</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>${user.phoneNumber}</p>
+                                <c:if test="${user.availability == 1}">
+                                    <p>Có thể thuê</p>
+                                </c:if>
+                                <c:if test="${user.availability == 0}">
+                                    <p>Đang bận</p>
+                                </c:if>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label>Ngày Sinh</label>
+                                <label>Giới tính</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>${user.gender == 1 ? 'Nam' : "Nữ"}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Ngày S
+                                    inh</label>
                             </div>
                             <div class="col-md-6">
                                 <p>${user.dob}</p>

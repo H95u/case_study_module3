@@ -1,6 +1,8 @@
 package com.example.case_study_module3.controller;
 
+import com.example.case_study_module3.DAO.PartnerDAO;
 import com.example.case_study_module3.DAO.UserDAO;
+import com.example.case_study_module3.model.Partner;
 import com.example.case_study_module3.model.User;
 import com.example.case_study_module3.service.LoginService;
 
@@ -73,6 +75,10 @@ public class LoginServlet extends HttpServlet {
         User user = UserDAO.getInstance().findById(checkLogin);
         if (checkLogin != -1) {
             request.setAttribute("user", user);
+            HttpSession session = request.getSession();
+            session.setAttribute("userRole", user.getUserRole());
+            List<Partner> partnerList = PartnerDAO.getInstance().findAll();
+            request.setAttribute("partnerList", partnerList);
             request.getRequestDispatcher("/home.jsp").forward(request, response);
         } else {
             response.sendRedirect("/login/login.jsp?loginCode=1");

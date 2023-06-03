@@ -18,21 +18,28 @@
 </head>
 <body>
 <div class="header">
-    <c:if test="${user.image != null}">
-        <a href="/userInfo?action=showInfo&id=${user.id}">
-            <img width="50" height="50" style="float: right;border-radius: 30px"
-                 src="data:image/jpeg;base64,${Base64.getEncoder().encodeToString(user.image)}"/>
-        </a>
+    <button></button>
+    <c:if test="${user != null}">
+        <c:if test="${user.image != null}">
+            <a href="/userInfo?action=showInfo&id=${user.id}">
+                <img width="50" height="50" style="float: right;border-radius: 30px"
+                     src="data:image/jpeg;base64,${Base64.getEncoder().encodeToString(user.image)}"/>
+            </a>
+        </c:if>
+        <c:if test="${user.image == null}">
+            <a href="/userInfo?action=showInfo&id=${user.id}">
+                <img height="50" width="50" src="/img/default.png" alt=""
+                     style="float: right;border-radius: 5px">
+            </a>
+        </c:if>
     </c:if>
-    <c:if test="${user.image == null}">
-        <a href="/userInfo?action=showInfo&id=${user.id}">
-            <img height="50" width="50" src="/user_info/default.png" alt=""
-                 style="float: right;border-radius: 5px">
-        </a>
-    </c:if>
-    <h1 style="text-align: center">header</h1>
+    <a href="/home" style="position: fixed;z-index: 10">
+        <img style="width: 50px;height: 50px" src="/img/logo.png">
+    </a>
 </div>
-
+<div class="banner">
+    <img style="width: 100%;height: 100px" src="img/39954a5f77a37fdcfbb7e64562491215.jpg">
+</div>
 <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;"
      id="mySidebar"><br>
@@ -44,21 +51,33 @@
         <a href="#" class="w3-bar-item w3-button w3-hover-white">Trang chủ</a>
         <a href="#showcase" class="w3-bar-item w3-button w3-hover-white">Danh mục</a>
         <a href="#services" class="w3-bar-item w3-button w3-hover-white">Services</a>
-        <a href="#designers" class="w3-bar-item w3-button w3-hover-white">Designers</a>
-        <a href="#packages" class="w3-bar-item w3-button w3-hover-white">Packages</a>
-        <a href="#contact" class="w3-bar-item w3-button w3-hover-white">Contact</a>
+        <a href="#designers" class="w3-bar-item w3-button w3-hover-white">Contact</a>
+        <a href="/login/login.jsp" class="w3-bar-item w3-button w3-hover-white">Đăng nhập</a>
+        <a href="/home" class="w3-bar-item w3-button w3-hover-white">Đăng xuất</a>
     </div>
 </nav>
 
-<div class="body-content" style="margin-left: 300px">
+<div class="body-content" style="margin-left: 300px;text-align: center;margin-top: 50px">
 
     <div class="row">
-        <%--    <c:forEach var="a" items="${accountList}">--%>
-        <%--      <div class="col-lg-3">--%>
-        <%--        <img width="100" height="100"--%>
-        <%--             src="data:image/jpeg;base64,${Base64.getEncoder().encodeToString(a.image)}"/>--%>
-        <%--      </div>--%>
-        <%--    </c:forEach>--%>
+        <c:forEach var="p" items="${partnerList}">
+            <div class="col-lg-3" style="border: 1px solid black;border-radius: 10px;padding: 10px">
+                <a href="/home?action=partnerInfo&id=${p.id}">
+                <c:if test="${p.image != null}">
+                    <img style="border-radius: 50px" width="200" height="200"
+                         src="data:image/jpeg;base64,${Base64.getEncoder().encodeToString(p.image)}"/>
+                </c:if>
+                <p>${p.nickname}</p>
+                <p>${p.hourlyRate}</p>
+                <c:if test="${p.availability == 1}">
+                    <p>Có thể thuê</p>
+                </c:if>
+                <c:if test="${p.availability == 0}">
+                    <p>Đang bận</p>
+                </c:if>
+                </a>
+            </div>
+        </c:forEach>
     </div>
 
 </div>
