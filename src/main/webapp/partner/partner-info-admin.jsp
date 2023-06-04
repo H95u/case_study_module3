@@ -150,6 +150,11 @@
                                 </c:forEach>
                             </div>
                         </div>
+                        <div>
+                            <button class="btn btn-info">
+                                <a href="/partners?action=update&id=${user.id}">Thêm dịch vụ</a>
+                            </button>
+                        </div>
                     </div>
 
                 </div>

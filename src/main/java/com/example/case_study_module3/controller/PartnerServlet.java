@@ -1,6 +1,8 @@
 package com.example.case_study_module3.controller;
 
+import com.example.case_study_module3.DAO.OptionsDAO;
 import com.example.case_study_module3.DAO.PartnerDAO;
+import com.example.case_study_module3.model.Options;
 import com.example.case_study_module3.model.Partner;
 
 import javax.servlet.*;
@@ -9,6 +11,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @WebServlet(name = "PartnerServlet", value = "/partners")
 public class PartnerServlet extends HttpServlet {
@@ -23,7 +26,7 @@ public class PartnerServlet extends HttpServlet {
                 createGet(request, response);
                 break;
             case "update":
-
+                updateOptionGet(request, response);
                 break;
             case "partnerInfo":
                 showPartnerInfo(request, response);
@@ -44,7 +47,7 @@ public class PartnerServlet extends HttpServlet {
                 createPost(request, response);
                 break;
             case "update":
-
+                updateOptionPost(request, response);
                 break;
             case "login":
 
@@ -73,9 +76,22 @@ public class PartnerServlet extends HttpServlet {
         String address = request.getParameter("address");
         String dateStr = request.getParameter("DOB");
         LocalDate date = LocalDate.parse(dateStr, DateTimeFormatter.ISO_DATE);
-        Partner partner = new Partner(nickname,hourlyRate,availability,gender,address,date);
+        Partner partner = new Partner(nickname, hourlyRate, availability, gender, address, date);
         PartnerDAO.getInstance().createNewPartner(partner);
         response.sendRedirect("/home");
+    }
+
+    private void updateOptionGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        List<Options> optionOfPartner = PartnerDAO.getInstance().findOption(id);
+        List<Options> optionList = OptionsDAO.getInstance().findAll();
+        request.setAttribute("optionList", optionList);
+        request.setAttribute("optionOfPartner", optionOfPartner);
+        request.getRequestDispatcher("/partner/update-options.jsp").forward(request, response);
+    }
+
+    private void updateOptionPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 
 }

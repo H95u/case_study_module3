@@ -33,8 +33,7 @@ public class OptionsDAO {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 double price = resultSet.getDouble("price");
-                List<Partner> partnerList = PartnerDAO.getInstance().findAll();
-                optionsList.add(new Options(id, name, price, partnerList));
+                optionsList.add(new Options(id, name, price));
             }
         } catch (Exception e) {
             e.printStackTrace();
