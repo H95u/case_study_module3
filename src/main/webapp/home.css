@@ -6,9 +6,18 @@ body {
     font-size: 16px;
 }
 
-div .header{
+div .header {
     background-color: black;
 }
+
 .user-img {
     border-radius: 5px;
+}
+
+* {
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
 }

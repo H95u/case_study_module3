@@ -43,8 +43,10 @@ public class LoginService {
         int gender = Integer.parseInt(request.getParameter("gender"));
         String address = request.getParameter("regAddress");
         String date = request.getParameter("regDOB");
-        LocalDate DOB = LocalDate.parse(date, DateTimeFormatter.ISO_DATE);
-        return checkAllInfo(username, password, email, fullName, phoneNumber, gender, address, DOB);
+        if (!date.equals("")) {
+            LocalDate DOB = LocalDate.parse(date, DateTimeFormatter.ISO_DATE);
+            return checkAllInfo(username, password, email, fullName, phoneNumber, gender, address, DOB);
+        } else return false;
     }
 
     private static boolean checkAllInfo(String username, String password, String email, String fullName, String phoneNumber, int gender, String address, LocalDate DOB) {

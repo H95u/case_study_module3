@@ -74,12 +74,9 @@ public class LoginServlet extends HttpServlet {
         int checkLogin = LoginService.getInstance().login(request);
         User user = UserDAO.getInstance().findById(checkLogin);
         if (checkLogin != -1) {
-            request.setAttribute("user", user);
             HttpSession session = request.getSession();
-            session.setAttribute("userRole", user.getUserRole());
-            List<Partner> partnerList = PartnerDAO.getInstance().findAll();
-            request.setAttribute("partnerList", partnerList);
-            request.getRequestDispatcher("/home.jsp").forward(request, response);
+            session.setAttribute("user", user);
+            response.sendRedirect("/home");
         } else {
             response.sendRedirect("/login/login.jsp?loginCode=1");
         }

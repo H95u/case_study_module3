@@ -7,6 +7,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @WebServlet(name = "PartnerServlet", value = "/partners")
 public class PartnerServlet extends HttpServlet {
@@ -18,7 +20,7 @@ public class PartnerServlet extends HttpServlet {
         }
         switch (action) {
             case "create":
-
+                createGet(request, response);
                 break;
             case "update":
 
@@ -39,7 +41,7 @@ public class PartnerServlet extends HttpServlet {
         }
         switch (action) {
             case "create":
-
+                createPost(request, response);
                 break;
             case "update":
 
@@ -58,4 +60,22 @@ public class PartnerServlet extends HttpServlet {
         request.setAttribute("user", partner);
         request.getRequestDispatcher("/partner/partner-info.jsp").forward(request, response);
     }
+
+    private void createGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.sendRedirect("/partner/new-partner.jsp");
+    }
+
+    private void createPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String nickname = request.getParameter("name");
+        double hourlyRate = Double.parseDouble(request.getParameter("hourlyRate"));
+        int availability = Integer.parseInt(request.getParameter("availability"));
+        int gender = Integer.parseInt(request.getParameter("gender"));
+        String address = request.getParameter("address");
+        String dateStr = request.getParameter("DOB");
+        LocalDate date = LocalDate.parse(dateStr, DateTimeFormatter.ISO_DATE);
+        Partner partner = new Partner(nickname,hourlyRate,availability,gender,address,date);
+        PartnerDAO.getInstance().createNewPartner(partner);
+        response.sendRedirect("/home");
+    }
+
 }

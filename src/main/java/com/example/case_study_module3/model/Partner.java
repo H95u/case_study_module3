@@ -5,8 +5,6 @@ import java.util.List;
 
 public class Partner {
     private int id;
-    private String username;
-    private String password;
     private String nickname;
     private double hourlyRate;
     private int availability;
@@ -19,12 +17,10 @@ public class Partner {
     public Partner() {
     }
 
-    public Partner(int id, String username, String password, String nickname,
+    public Partner(int id, String nickname,
                    double hourlyRate, int availability, byte[] image, LocalDate dob,
                    String address, int gender, List<Options> optionsList) {
         this.id = id;
-        this.username = username;
-        this.password = password;
         this.nickname = nickname;
         this.hourlyRate = hourlyRate;
         this.availability = availability;
@@ -35,15 +31,32 @@ public class Partner {
         this.optionsList = optionsList;
     }
 
-    public Partner(int id, String username, String password, String nickname, double hourlyRate, int availability, byte[] image, LocalDate dob, String address, int gender) {
+    public Partner(int id, String nickname, double hourlyRate, int availability, byte[] image, LocalDate dob, String address, int gender) {
         this.id = id;
-        this.username = username;
-        this.password = password;
         this.nickname = nickname;
         this.hourlyRate = hourlyRate;
         this.availability = availability;
         this.image = image;
         this.dob = dob;
+        this.address = address;
+        this.gender = gender;
+    }
+
+    public Partner(int id, String nickname, double hourlyRate, int availability, LocalDate dob, String address, int gender) {
+        this.id = id;
+        this.nickname = nickname;
+        this.hourlyRate = hourlyRate;
+        this.availability = availability;
+        this.dob = dob;
+        this.address = address;
+        this.gender = gender;
+    }
+
+    public Partner(String nickname, double hourlyRate, int availability, int gender, String address, LocalDate date) {
+        this.nickname = nickname;
+        this.hourlyRate = hourlyRate;
+        this.availability = availability;
+        this.dob = date;
         this.address = address;
         this.gender = gender;
     }
@@ -56,21 +69,6 @@ public class Partner {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getNickname() {
         return nickname;

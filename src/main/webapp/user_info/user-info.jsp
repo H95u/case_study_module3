@@ -20,7 +20,10 @@
 </head>
 <body>
 <div>
-
+        <a href="/home">
+            <img style="width: 50px;height: 50px" src="/img/logo.png">
+        </a>
+    <h1 style="text-align: center;color: white">THÔNG TIN CÁ NHÂN</h1>
 </div>
 <hr>
 <div class="container emp-profile">

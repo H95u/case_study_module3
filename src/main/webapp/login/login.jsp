@@ -34,6 +34,7 @@
 </c:if>
 <form action="/login?action=login" method="post">
     <div id="formLogin">
+           <p style="text-align: center"> <a href="/home" style="color: #fffb00"> Trở về trang chủ </a></p>
         <fieldset style="width: 300px">
             <legend style="text-align: center">Đăng nhập</legend>
             <p>Username : <input style="width:280px" type="text" placeholder="Tên đăng nhập" name="userNameLogin"></p>
