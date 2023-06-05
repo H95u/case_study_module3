@@ -17,6 +17,16 @@
             integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/user_info/user-info.css">
+    <style>
+        .bookingForm {
+            width: 500px;
+            height: 300px;
+            border: 1px solid black;
+            background-color: white;
+            margin-left: 480px;
+            border-radius: 50px;
+        }
+    </style>
 </head>
 <body>
 <div>
@@ -26,6 +36,33 @@
     <h1 style="text-align: center;color: white">THÔNG TIN CÁ NHÂN</h1>
 </div>
 <hr>
+<div class="bookingForm" id="bookingForm" style="position: absolute;display: none">
+    <div class="row" style="margin-left: 50px">
+        <p>Thời gian bắt đầu thuê</p>
+        <div>
+            <input type="datetime-local" name="startTime">
+        </div>
+    </div>
+    <hr>
+    <div class="row" style="margin-left: 50px">
+        <p>Thời gian kết thúc</p>
+        <div>
+            <input type="datetime-local" name="endTime">
+        </div>
+    </div>
+    <hr>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-6">
+                <button class="btn btn-info">Đặt</button>
+            </div>
+            <div class="col-lg-6">
+                <button class="btn btn-info" onclick="hideBookingForm();">Quay lại</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container emp-profile">
     <form id="myForm" method="post" action="/home?action=upload&id=${user.id}" enctype="multipart/form-data">
         <div class="row">
@@ -77,10 +114,9 @@
             </c:if>
             <c:if test="${user.availability == 1}">
                 <div class="col-md-2">
-                    <a class="btn btn-danger" onclick="checkLogin(${sessionScope.user});">Thuê</a>
+                    <a class="btn btn-danger" onclick="showBookingForm();">Thuê</a>
                 </div>
             </c:if>
-
         </div>
         <div class="row">
             <div class="col-md-4">
@@ -168,10 +204,19 @@
         var form = document.getElementById("myForm");
         form.submit();
     }
+
     function checkLogin(user) {
-        if (user == null){
+        if (user == null) {
             alert("Bạn phải đăng nhập để thuê !!")
         }
+    }
+
+    function showBookingForm() {
+        document.getElementById("bookingForm").style.display = "block";
+    }
+
+    function hideBookingForm() {
+        document.getElementById("bookingForm").style.display = "none";
     }
 </script>
 </html>

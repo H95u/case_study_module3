@@ -83,31 +83,23 @@
 
     <div class="row">
         <c:forEach var="p" items="${partnerList}">
-            <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
-                <div class="bg-white rounded shadow-sm">
-                    <a href="/home?action=partnerInfo&id=${p.id}">
-                        <img style="border-radius: 10px" width="280" height="230"
+            <div class="col-lg-3" style="border: 1px dotted #98b215;padding: 10px">
+                <a href="/home?action=partnerInfo&id=${p.id}">
+                    <c:if test="${p.image != null}">
+                        <img style="border-radius: 50px" width="200" height="200"
                              src="data:image/jpeg;base64,${Base64.getEncoder().encodeToString(p.image)}"/>
-                    </a>
-                    <div class="p-4">
-                        <h5><a href="/home?action=partnerInfo&id=${p.id}" class="text-dark">${p.nickname}</a></h5>
-                        <c:if test="${p.availability == 1}">
-                            <p class="small text-muted mb-0">Trạng thái : Có thể thuê</p>
-                        </c:if>
-                        <c:if test="${p.availability == 0}">
-                            <p class="small text-muted mb-0">Trạng thái : Đang bận</p>
-                        </c:if>
-                        <p class="small text-muted mb-0"></p>
-                        <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
-                            <p class="small mb-0"><i class="fa fa-picture-o mr-2"></i><span
-                                    class="font-weight-bold" style="text-align: center">Giá : ${p.hourlyRate} / h</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                    </c:if>
+                    <p>Nickname : ${p.nickname}</p>
+                    <p>Giá : ${p.hourlyRate}</p>
+                    <c:if test="${p.availability == 1}">
+                        <p>Trạng thái : Có thể thuê</p>
+                    </c:if>
+                    <c:if test="${p.availability == 0}">
+                        <p>Trạng thái : Đang bận</p>
+                    </c:if>
+                </a>
             </div>
         </c:forEach>
-
     </div>
     <!-- Footer-->
     <div class="w3-light-grey w3-container w3-padding-32"

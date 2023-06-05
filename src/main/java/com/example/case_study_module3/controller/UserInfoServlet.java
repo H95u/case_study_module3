@@ -10,8 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+
 
 @MultipartConfig
 @WebServlet(name = "UserInfoServlet", value = "/userInfo")
@@ -87,8 +86,7 @@ public class UserInfoServlet extends HttpServlet {
         String phoneNumber = request.getParameter("regPhoneNumber");
         int gender = Integer.parseInt(request.getParameter("gender"));
         String address = request.getParameter("regAddress");
-        String date = request.getParameter("regDOB");
-        LocalDate DOB = LocalDate.parse(date, DateTimeFormatter.ISO_DATE);
+        LocalDate DOB = LocalDate.parse(request.getParameter("regDOB"));
         User user = new User(id, email, fullName, phoneNumber, gender, address, DOB);
         UserDAO.getInstance().updateInfo(user);
         response.sendRedirect("/userInfo?action=showInfo&id=" + id);
