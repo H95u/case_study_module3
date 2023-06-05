@@ -24,7 +24,7 @@ public class PartnerDAO {
 
     public List<Partner> findAll() {
         List<Partner> partnerList = new ArrayList<>();
-        String querry = "select * from partner";
+        String querry = "select * from partner;";
         try (PreparedStatement preparedStatement = connection.prepareStatement(querry)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -56,7 +56,7 @@ public class PartnerDAO {
 
     public void updateInfo(Partner partner) {
         String querry = "update partner set nickname = ?, hourly_rate = ? , availability = ? ,dob = ? ," +
-                " address = ?, gender = ? where id = ?";
+                " address = ?, gender = ? where id = ?;";
         try (PreparedStatement preparedStatement = connection.prepareStatement(querry)) {
             preparedStatement.setString(1, partner.getNickname());
             preparedStatement.setDouble(2, partner.getHourlyRate());
@@ -73,7 +73,7 @@ public class PartnerDAO {
 
     public Partner findById(int id) {
         Partner partner = null;
-        String querry = "select * from partner where id = ? ";
+        String querry = "select * from partner where id = ?; ";
         List<Options> optionsList = findOption(id);
         try (PreparedStatement preparedStatement = connection.prepareStatement(querry)) {
             preparedStatement.setInt(1, id);
@@ -104,7 +104,7 @@ public class PartnerDAO {
     }
 
     public void uploadImage(InputStream fileContent, int id) {
-        String querry = "update partner set image = ?  where id = ?";
+        String querry = "update partner set image = ?  where id = ?;";
         try (PreparedStatement preparedStatement = connection.prepareStatement(querry)) {
             preparedStatement.setBinaryStream(1, fileContent);
             preparedStatement.setInt(2, id);
@@ -115,7 +115,7 @@ public class PartnerDAO {
     }
 
     public void createNewPartner(Partner partner) {
-        String querry = "insert into partner(nickname,hourly_rate,availability,gender,address,dob) values(?,?,?,?,?,?)";
+        String querry = "insert into partner(nickname,hourly_rate,availability,gender,address,dob) values(?,?,?,?,?,?);";
         try (PreparedStatement preparedStatement = connection.prepareStatement(querry)) {
             preparedStatement.setString(1, partner.getNickname());
             preparedStatement.setDouble(2, partner.getHourlyRate());
@@ -147,5 +147,15 @@ public class PartnerDAO {
             e.printStackTrace();
         }
         return optionsList;
+    }
+    public void deleteById (int id) {
+        String query = "DELETE FROM partner WHERE id = ?;";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

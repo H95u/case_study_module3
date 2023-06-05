@@ -46,9 +46,8 @@ public class PartnerServlet extends HttpServlet {
             case "create":
                 createPost(request, response);
                 break;
-            case "update":
-                updateOptionPost(request, response);
-                break;
+            case "delete":
+                deletePartner(request, response);
             case "login":
 
                 break;
@@ -90,8 +89,9 @@ public class PartnerServlet extends HttpServlet {
         request.getRequestDispatcher("/partner/update-options.jsp").forward(request, response);
     }
 
-    private void updateOptionPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    private void deletePartner(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        PartnerDAO.getInstance().deleteById(id);
+        response.sendRedirect("/home");
     }
-
 }
