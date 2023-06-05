@@ -81,26 +81,25 @@
 
 <div class="body-content" style="margin-left: 300px;text-align: center;margin-top: 10px">
 
-    <div class="row" style="padding: 20px">
+    <div class="row">    <!-- Gallery item -->
         <c:forEach var="p" items="${partnerList}">
-            <div class="col-lg-3" style="border: 1px dotted #98b215;padding: 10px">
-                <a href="/home?action=partnerInfo&id=${p.id}">
-                    <c:if test="${p.image != null}">
-                        <img style="border-radius: 50px" width="200" height="200"
-                             src="data:image/jpeg;base64,${Base64.getEncoder().encodeToString(p.image)}"/>
-                    </c:if>
-                    <p>Nickname : ${p.nickname}</p>
-                    <p>Giá : ${p.hourlyRate}</p>
-                    <c:if test="${p.availability == 1}">
-                       <p>Trạng thái : Có thể thuê</p>
-                    </c:if>
-                    <c:if test="${p.availability == 0}">
-                        <p>Trạng thái : Đang bận</p>
-                    </c:if>
-                </a>
+            <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                <div class="bg-white rounded shadow-sm">
+                    <img style="border-radius: 50px" width="200" height="200"
+                         src="data:image/jpeg;base64,${Base64.getEncoder().encodeToString(p.image)}"/>
+                    <div class="p-4">
+                        <h5><a href="#" class="text-dark">Blorange</a></h5>
+                        <p class="small text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing
+                            elit</p>
+                        <div class="d-flex align-items-center justify-content-between rounded-pill bg-light px-3 py-2 mt-4">
+                            <p class="small mb-0"><i class="fa fa-picture-o mr-2"></i><span
+                                    class="font-weight-bold">PNG</span></p>
+                            <div class="badge badge-primary px-3 rounded-pill font-weight-normal">Trend</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </c:forEach>
-    </div>
 
 </div>
 <!-- Footer-->
