@@ -1,6 +1,5 @@
 package com.example.case_study_module3.model;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class Booking {
